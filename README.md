@@ -12,7 +12,7 @@ Interactive dashboard for exploring 75 years of Formula 1 history (1950–2024).
 
 ## Preview
 
-![Dashboard overview](docs/screenshots/01_overview.jpg)
+<img width="1919" height="914" alt="image" src="https://github.com/user-attachments/assets/bb94c2b8-9c91-476c-9495-8d1cda595499" />
 
 ## Dataset
 
