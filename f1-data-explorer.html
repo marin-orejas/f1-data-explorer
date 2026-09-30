@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>F1 Data Explorer — 1950 to 2024</title>
+<title>F1 Data Explorer (1950–2024)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -471,7 +471,7 @@
   <div class="header-inner">
     <div class="brand">
       <h1>F1 Data Explorer</h1>
-      <p>Seventy-five years of Formula 1 — 1950 to 2024</p>
+      <p>Formula 1 results from 1950 to 2024</p>
     </div>
     <button class="theme-toggle" id="themeToggle" title="Toggle theme">🌙</button>
   </div>
@@ -509,7 +509,7 @@
         <div class="chart-wrap"><canvas id="chartDrivers"></canvas></div>
       </div>
       <div class="chart-card col-6">
-        <h3>Points per decade — Top 5 constructors</h3>
+        <h3>Top 5 constructors, points per decade</h3>
         <div class="chart-wrap"><canvas id="chartConstructors"></canvas></div>
       </div>
       <div class="chart-card col-6">
@@ -521,7 +521,7 @@
         <div class="chart-wrap"><canvas id="chartGrid"></canvas></div>
       </div>
       <div class="chart-card col-12">
-        <h3>Top 10 circuits by races held</h3>
+        <h3>Top 10 Grands Prix by races held</h3>
         <div class="chart-wrap"><canvas id="chartCircuits"></canvas></div>
       </div>
     </section>
@@ -537,7 +537,7 @@
               <th data-key="position">Position <span class="sort-indicator">↕</span></th>
               <th data-key="points">Points <span class="sort-indicator">↕</span></th>
               <th data-key="year">Year <span class="sort-indicator">↕</span></th>
-              <th data-key="circuit">Circuit <span class="sort-indicator">↕</span></th>
+              <th data-key="circuit">Grand Prix <span class="sort-indicator">↕</span></th>
             </tr>
           </thead>
           <tbody></tbody>
@@ -547,10 +547,10 @@
 
     <section class="about">
       <h2>About this project</h2>
-      <p>An interactive exploration of seven decades of Formula 1 history, built entirely client-side. Every chart and metric is computed live in your browser from the raw Ergast dataset.</p>
+      <p>Formula 1 results from 1950 to 2024. The browser computes every chart and number from the Ergast data embedded in this page.</p>
 
       <h4>Data source</h4>
-      <p>Ergast Motor Racing API via Kaggle — <a href="https://www.kaggle.com/datasets/rohanrao/formula-1-world-championship-1950-2020" target="_blank" rel="noopener">rohanrao/formula-1-world-championship-1950-2020</a></p>
+      <p>Ergast Motor Racing data, via Kaggle: <a href="https://www.kaggle.com/datasets/rohanrao/formula-1-world-championship-1950-2020" target="_blank" rel="noopener">rohanrao/formula-1-world-championship-1950-2020</a></p>
 
       <h4>Technologies</h4>
       <div class="tag-row">
@@ -561,11 +561,11 @@
         <span class="tag">CSS3</span>
       </div>
 
-      <h4>Key insights discovered in the data</h4>
+      <h4>Findings</h4>
       <ul id="insightsList"></ul>
 
       <div class="credits">
-        Your Name &nbsp;|&nbsp; <a href="#">GitHub</a> &nbsp;|&nbsp; <a href="#">LinkedIn</a>
+        Marin Orejaš &nbsp;|&nbsp; <a href="https://github.com/marin-orejas" target="_blank" rel="noopener">GitHub</a> &nbsp;|&nbsp; <a href="https://www.linkedin.com/in/marin-oreja%C5%A1-b869a0268/" target="_blank" rel="noopener">LinkedIn</a>
       </div>
     </section>
   </div>
@@ -905,7 +905,7 @@ function buildGridChart() {
         legend: { display: false },
         tooltip: {
           callbacks: {
-            label: (c) => `${c.raw.driver} (${c.raw.year}) — Grid ${c.raw.x} → Pos ${c.raw.y}`
+            label: (c) => `${c.raw.driver} (${c.raw.year}): grid ${c.raw.x}, finished ${c.raw.y}`
           }
         }
       },
@@ -1047,10 +1047,10 @@ function renderInsights() {
   const topCircuit = [...circuits.entries()].sort((a, b) => b[1] - a[1])[0];
 
   const insights = [
-    `<strong>${topDriver[0]}</strong> tops the all-time win count with <strong>${topDriver[1]} race victories</strong> — a benchmark that defines the modern era.`,
-    `<strong>${topConstructor[0]}</strong> leads constructor wins with <strong>${topConstructor[1]} victories</strong>, reflecting decades of sustained dominance.`,
-    `Pole position converts to a race win roughly <strong>${polePct}%</strong> of the time — qualifying out front remains the single strongest predictor of victory.`,
-    `The <strong>${topCircuit[0]}</strong> has hosted <strong>${topCircuit[1]} F1 races</strong>, making it the most-run event on the calendar.`
+    `<strong>${topDriver[0]}</strong> has the most race wins: <strong>${topDriver[1]}</strong>.`,
+    `<strong>${topConstructor[0]}</strong> has the most wins among constructors: <strong>${topConstructor[1]}</strong>.`,
+    `The driver starting on pole won <strong>${polePct}%</strong> of races.`,
+    `No Grand Prix has been held more often than the <strong>${topCircuit[0]}</strong>, with <strong>${topCircuit[1]}</strong> races.`
   ];
 
   document.getElementById('insightsList').innerHTML = insights.map(i => `<li>${i}</li>`).join('');
