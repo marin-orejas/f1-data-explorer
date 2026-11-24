@@ -1,34 +1,24 @@
 # F1 Data Explorer
 
-A dashboard over Formula 1 results from 1950 to 2024. It is a single HTML file with no
-backend. The browser parses four CSV tables, joins them and computes every chart and number.
+![Status: complete](https://img.shields.io/badge/status-complete-0969da?style=flat-square)
+[![License](https://img.shields.io/github/license/marin-orejas/f1-data-explorer?style=flat-square)](LICENSE)
 
-Live version: [marin-orejas.github.io/f1-data-explorer](https://marin-orejas.github.io/f1-data-explorer/)
+Dashboard of Formula 1 results from 1950 to 2024, in a single HTML file with Chart.js and PapaParse.
+The [live version](https://marin-orejas.github.io/f1-data-explorer/) runs on GitHub Pages.
 
 ![Summary cards, filters and the first two charts](docs/screenshot.png)
 
-## What it shows
+## Highlights
 
-| Part | Content |
-|---|---|
-| Summary cards | Races, drivers and constructors, and the nationality with the most race wins |
-| Top 15 drivers | The drivers with the most points |
-| Top 5 constructors | Points per decade for the five constructors with the most points |
-| Nationalities | The 10 nationalities with the most drivers |
-| Grid and finish | Starting position against finishing position, for 500 random race entries |
-| Grands Prix | The 10 Grands Prix held most often |
-| Results table | 100 race results, sorted by points. Click a column to sort by it. |
-| Findings | Four facts from the whole dataset, such as how often the driver starting on pole wins |
-
-The decade filter applies to the cards, the charts and the table. Typing a driver's name
-highlights that driver in the top 15 chart and in the table.
+- The browser joins 26,759 race results from 75 seasons with races, drivers and constructors.
+- A single decade filter updates 4 summary cards, 5 Chart.js charts and a results table.
+- Typing a driver's name highlights that driver in the top 15 chart and in the results table.
+- The app is a single HTML file with the data inside, so it needs no backend and no build step.
 
 ## Data
 
-The data comes from the Ergast Motor Racing database, through the
-[Formula 1 World Championship dataset on Kaggle](https://www.kaggle.com/datasets/rohanrao/formula-1-world-championship-1950-2020).
-It covers the seasons from 1950 to 2024. The four tables are stored in `index.html` as CSV
-text, so the page makes no data requests.
+The data comes from the Ergast Motor Racing database, through the [Formula 1 World Championship dataset on Kaggle](https://www.kaggle.com/datasets/rohanrao/formula-1-world-championship-1950-2020).
+`index.html` stores the 4 tables as CSV text, so the page makes no data requests.
 
 | Table | Rows | Used for |
 |---|---|---|
@@ -37,19 +27,49 @@ text, so the page makes no data requests.
 | `drivers` | 861 | Name and nationality |
 | `constructors` | 212 | Team name |
 
-On load, PapaParse reads the four tables. The page builds a lookup by ID for races, drivers
-and constructors, then joins each result to its race, driver and constructor. The filters
-and charts work on this joined list.
+## Loading
 
-## Built with
+The page prepares the data once, when it opens.
 
-Plain JavaScript, HTML and CSS, with Chart.js 4.4 for the charts and PapaParse 5.4 for CSV
-parsing. There is no build step.
+1. PapaParse reads the 4 CSV tables from `index.html`.
+2. The page builds a lookup by ID for races, drivers and constructors.
+3. The page joins each result to its race, driver and constructor, and adds its decade.
+4. The cards, charts and table read from this joined list.
+
+## Dashboard
+
+The decade filter applies to the cards, the charts and the table.
+The findings always use the whole dataset.
+
+| Part | Content |
+|---|---|
+| Summary cards | Race, driver and constructor counts, top nationality by race wins |
+| Top 15 drivers | Drivers with the most points |
+| Top 5 constructors | Points per decade for the 5 constructors with the most points |
+| Nationalities | The 10 nationalities with the most drivers |
+| Grid and finish | Starting against finishing position, for 500 random race entries |
+| Grands Prix | The 10 Grands Prix held most often |
+| Results table | Top 100 race results by points, sortable by any column |
+| Findings | 4 facts, such as how often the driver starting on pole wins |
+
+## Tech stack
+
+| Layer | Tools |
+|---|---|
+| Data | CSV, PapaParse |
+| Frontend | JavaScript, HTML, CSS |
+| Charts | Chart.js |
+| Hosting | GitHub Pages |
 
 ## Run locally
 
-Open `index.html` in a browser. Chart.js, PapaParse and the font load from a CDN, so the
-page needs an internet connection.
+Requires a browser with an internet connection, because Chart.js, PapaParse and the font load from a CDN.
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/marin-orejas/f1-data-explorer.git
+   ```
+2. Open `index.html` in a browser. The dashboard appears when the 4 tables finish loading.
 
 ## License
 
